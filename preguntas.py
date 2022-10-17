@@ -358,6 +358,14 @@ def pregunta_10():
 
 
     """
+    data = open("data.csv", "r").readlines()
+    data = [fila.replace("\n","") for fila in data]
+    data = [fila.replace("\t"," ") for fila in data]
+    data = [fila.split(" ") for fila in data]
+
+    cols1_4_5 = [(fila[0], fila[3], fila[4]) for fila in data]
+    tuplas2 = [(tp[0], len(tp[1].split(",")), len(tp[2].split(","))) for tp in cols1_4_5]
+
     return
 
 
@@ -384,9 +392,13 @@ def pregunta_11():
     data = [fila.replace("\t"," ") for fila in data]
     data = [fila.split(" ") for fila in data]
 
-    cols1_4_5 = [(fila[0], fila[3], fila[4]) for fila in data]
-    tuplas2 = [(tp[0], len(tp[1].split(",")), len(tp[2].split(","))) for tp in cols1_4_5]
-    return tuplas2
+    col2_4 = [(line[1], line[3]) for line in data]
+    col2_4 = [(letter, (int(line[0]))) for line in col2_4 for letter in line[1].split(",")]
+    counter = {}
+    for key, value in col2_4:
+        counter[key] = counter.get(key, 0) + value
+        
+    return dict(sorted(counter.items()))
 
 
 def pregunta_12():
