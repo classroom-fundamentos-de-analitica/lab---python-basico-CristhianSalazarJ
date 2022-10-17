@@ -366,7 +366,7 @@ def pregunta_10():
     cols1_4_5 = [(fila[0], fila[3], fila[4]) for fila in data]
     tuplas2 = [(tp[0], len(tp[1].split(",")), len(tp[2].split(","))) for tp in cols1_4_5]
 
-    return
+    return tuplas2
 
 
 def pregunta_11():
@@ -397,7 +397,7 @@ def pregunta_11():
     counter = {}
     for key, value in col2_4:
         counter[key] = counter.get(key, 0) + value
-        
+
     return dict(sorted(counter.items()))
 
 
