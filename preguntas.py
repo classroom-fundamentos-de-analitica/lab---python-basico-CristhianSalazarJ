@@ -11,7 +11,15 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 
 
 """
+def procesamiento():
 
+    data = open("data.csv", "r").readlines()
+
+    data = [fila.replace("\n","") for fila in data]
+    data = [fila.replace("\t"," ") for fila in data]
+    data = [fila.split(" ") for fila in data]
+
+    return data
 
 
 def pregunta_01():
@@ -23,12 +31,8 @@ def pregunta_01():
     214
 
     """
+    data = procesamiento()
 
-    data = open("data.csv", "r").readlines()
-
-    data = [fila.replace("\n","") for fila in data]
-    data = [fila.replace("\t"," ") for fila in data]
-    data = [fila.split(" ") for fila in data]
     col2 = [int(col[1]) for col in data]
 
     return sum(col2)
@@ -53,11 +57,7 @@ def pregunta_02():
     from collections import Counter
     from operator import itemgetter
 
-    data = open("data.csv", "r").readlines()
-
-    data = [fila.replace("\n","") for fila in data]
-    data = [fila.replace("\t"," ") for fila in data]
-    data = [fila.split(" ") for fila in data]
+    data = procesamiento()
 
     col1 = [fila[0] for fila in data]
     cnt_col1 = Counter(col1)
@@ -85,10 +85,7 @@ def pregunta_03():
     """
     from collections import defaultdict
 
-    data = open("data.csv", "r").readlines()
-    data = [fila.replace("\n","") for fila in data]
-    data = [fila.replace("\t"," ") for fila in data]
-    data = [fila.split(" ") for fila in data]
+    data = procesamiento()
 
     cols1_2 = [(fila[0], int(fila[1])) for fila in data]
     d = defaultdict(int)
@@ -124,10 +121,7 @@ def pregunta_04():
     from collections import Counter
     from operator import itemgetter
 
-    data = open("data.csv", "r").readlines()
-    data = [fila.replace("\n","") for fila in data]
-    data = [fila.replace("\t"," ") for fila in data]
-    data = [fila.split(" ") for fila in data]
+    data = procesamiento()
 
     col3_fechas = [fila[2] for fila in data]
     col3_fechas = [fecha.split("-") for fecha in col3_fechas]
@@ -158,10 +152,7 @@ def pregunta_05():
     """
     from collections import defaultdict
 
-    data = open("data.csv", "r").readlines()
-    data = [fila.replace("\n","") for fila in data]
-    data = [fila.replace("\t"," ") for fila in data]
-    data = [fila.split(" ") for fila in data]
+    data = procesamiento()
 
     cols1_2 = [(fila[0], int(fila[1])) for fila in data]
 
@@ -201,10 +192,7 @@ def pregunta_06():
     """
     from collections import defaultdict
 
-    data = open("data.csv", "r").readlines()
-    data = [fila.replace("\n","") for fila in data]
-    data = [fila.replace("\t"," ") for fila in data]
-    data = [fila.split(" ") for fila in data]
+    data = procesamiento()
 
     col5 = [fila[4].split(",") for fila in data]
     col5_split = [e.split(":") for fila in col5 for e in fila]
@@ -244,10 +232,7 @@ def pregunta_07():
     """
     from collections import defaultdict
 
-    data = open("data.csv", "r").readlines()
-    data = [fila.replace("\n","") for fila in data]
-    data = [fila.replace("\t"," ") for fila in data]
-    data = [fila.split(" ") for fila in data]
+    data = procesamiento()
 
     cols1_2 = [(fila[0], int(fila[1])) for fila in data]
     d4 = defaultdict(list)
@@ -284,10 +269,7 @@ def pregunta_08():
     """
     from collections import defaultdict
 
-    data = open("data.csv", "r").readlines()
-    data = [fila.replace("\n","") for fila in data]
-    data = [fila.replace("\t"," ") for fila in data]
-    data = [fila.split(" ") for fila in data]
+    data = procesamiento()
 
     cols1_2 = [(fila[0], int(fila[1])) for fila in data]
     d4 = defaultdict(list)
@@ -323,10 +305,7 @@ def pregunta_09():
     """
     from collections import Counter
     from operator import itemgetter
-    data = open("data.csv", "r").readlines()
-    data = [fila.replace("\n","") for fila in data]
-    data = [fila.replace("\t"," ") for fila in data]
-    data = [fila.split(" ") for fila in data]
+    data = procesamiento()
 
     col5 = [fila[4].split(",") for fila in data]
     col5_split = [e.split(":") for fila in col5 for e in fila]
@@ -358,10 +337,7 @@ def pregunta_10():
 
 
     """
-    data = open("data.csv", "r").readlines()
-    data = [fila.replace("\n","") for fila in data]
-    data = [fila.replace("\t"," ") for fila in data]
-    data = [fila.split(" ") for fila in data]
+    data = procesamiento()
 
     cols1_4_5 = [(fila[0], fila[3], fila[4]) for fila in data]
     tuplas2 = [(tp[0], len(tp[1].split(",")), len(tp[2].split(","))) for tp in cols1_4_5]
@@ -387,10 +363,7 @@ def pregunta_11():
 
 
     """
-    data = open("data.csv", "r").readlines()
-    data = [fila.replace("\n","") for fila in data]
-    data = [fila.replace("\t"," ") for fila in data]
-    data = [fila.split(" ") for fila in data]
+    data = procesamiento()
 
     col2_4 = [(line[1], line[3]) for line in data]
     col2_4 = [(letter, (int(line[0]))) for line in col2_4 for letter in line[1].split(",")]
@@ -419,10 +392,7 @@ def pregunta_12():
     
     from collections import defaultdict
 
-    data = open("data.csv", "r").readlines()
-    data = [fila.replace("\n","") for fila in data]
-    data = [fila.replace("\t"," ") for fila in data]
-    data = [fila.split(" ") for fila in data]
+    data = procesamiento()
 
     cols1_5 = [(fila[0], fila[4].split(",")) for fila in data]
     col_1_5_tuples = [(letra, int(reg.split(":")[1])) for letra,lista in cols1_5 for reg in lista]
