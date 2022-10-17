@@ -403,6 +403,7 @@ def pregunta_12():
     }
 
     """
+    
     from collections import defaultdict
 
     data = open("data.csv", "r").readlines()
