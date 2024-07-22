@@ -11,17 +11,31 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 
 
 """
+def procesamiento():
+
+    data = open("data.csv", "r").readlines()
+
+    data = [fila.replace("\n","") for fila in data]
+    data = [fila.replace("\t"," ") for fila in data]
+    data = [fila.split(" ") for fila in data]
+
+    return data
 
 
 def pregunta_01():
     """
     Retorne la suma de la segunda columna.
+    
 
     Rta/
     214
 
     """
-    return
+    data = procesamiento()
+
+    col2 = [int(col[1]) for col in data]
+
+    return sum(col2)
 
 
 def pregunta_02():
@@ -39,7 +53,19 @@ def pregunta_02():
     ]
 
     """
-    return
+
+    from collections import Counter
+    from operator import itemgetter
+
+    data = procesamiento()
+
+    col1 = [fila[0] for fila in data]
+    cnt_col1 = Counter(col1)
+    tuplas = cnt_col1.items()
+    tuplas = list(tuplas)
+    tuplas.sort(key=itemgetter(0))
+
+    return tuplas
 
 
 def pregunta_03():
@@ -57,7 +83,17 @@ def pregunta_03():
     ]
 
     """
-    return
+    from collections import defaultdict
+
+    data = procesamiento()
+
+    cols1_2 = [(fila[0], int(fila[1])) for fila in data]
+    d = defaultdict(int)
+
+    for k,v in cols1_2:
+        d[k] += v
+
+    return sorted(d.items())
 
 
 def pregunta_04():
@@ -82,7 +118,21 @@ def pregunta_04():
     ]
 
     """
-    return
+    from collections import Counter
+    from operator import itemgetter
+
+    data = procesamiento()
+
+    col3_fechas = [fila[2] for fila in data]
+    col3_fechas = [fecha.split("-") for fecha in col3_fechas]
+
+    meses = [x[1] for x in col3_fechas]
+    cnt_meses = Counter(meses)
+
+    tuplas_meses = list(cnt_meses.items())
+    tuplas_meses.sort(key=itemgetter(0))
+
+    return tuplas_meses
 
 
 def pregunta_05():
@@ -100,7 +150,22 @@ def pregunta_05():
     ]
 
     """
-    return
+    from collections import defaultdict
+
+    data = procesamiento()
+
+    cols1_2 = [(fila[0], int(fila[1])) for fila in data]
+
+    d2 = defaultdict(list)
+
+    for k,v in cols1_2:
+        d2[k].append(v)
+
+    list_tuplas = sorted(d2.items())
+    
+    res = [(tp[0], max(tp[1]), min(tp[1])) for tp in list_tuplas]
+
+    return res
 
 
 def pregunta_06():
@@ -125,7 +190,23 @@ def pregunta_06():
     ]
 
     """
-    return
+    from collections import defaultdict
+
+    data = procesamiento()
+
+    col5 = [fila[4].split(",") for fila in data]
+    col5_split = [e.split(":") for fila in col5 for e in fila]
+
+    d3 = defaultdict(list)
+
+    for k,v in col5_split:
+        d3[k].append(int(v))
+
+    lista_tuplas2 = sorted(d3.items())
+
+    res = [(tp[0], min(tp[1]), max(tp[1])) for tp in lista_tuplas2]
+
+    return res
 
 
 def pregunta_07():
@@ -149,7 +230,19 @@ def pregunta_07():
     ]
 
     """
-    return
+    from collections import defaultdict
+
+    data = procesamiento()
+
+    cols1_2 = [(fila[0], int(fila[1])) for fila in data]
+    d4 = defaultdict(list)
+
+    for v,k in cols1_2:
+        d4[int(k)].append(v)
+
+    res = sorted(d4.items())
+
+    return res
 
 
 def pregunta_08():
@@ -174,7 +267,20 @@ def pregunta_08():
     ]
 
     """
-    return
+    from collections import defaultdict
+
+    data = procesamiento()
+
+    cols1_2 = [(fila[0], int(fila[1])) for fila in data]
+    d4 = defaultdict(list)
+
+    for v,k in cols1_2:
+        d4[int(k)].append(v)
+
+    tuplas = sorted(d4.items())
+    lista_unicos = [(tp[0], sorted(list(set(tp[1])))) for tp in tuplas]
+
+    return lista_unicos
 
 
 def pregunta_09():
@@ -197,7 +303,20 @@ def pregunta_09():
     }
 
     """
-    return
+    from collections import Counter
+    from operator import itemgetter
+    data = procesamiento()
+
+    col5 = [fila[4].split(",") for fila in data]
+    col5_split = [e.split(":") for fila in col5 for e in fila]
+
+    reg = [fila[0] for fila in col5_split]
+
+    cnt_reg = Counter(reg)
+    tuplas = list(cnt_reg.items())
+    tuplas.sort(key=itemgetter(0))
+    
+    return dict(tuplas)
 
 
 def pregunta_10():
@@ -218,7 +337,12 @@ def pregunta_10():
 
 
     """
-    return
+    data = procesamiento()
+
+    cols1_4_5 = [(fila[0], fila[3], fila[4]) for fila in data]
+    tuplas2 = [(tp[0], len(tp[1].split(",")), len(tp[2].split(","))) for tp in cols1_4_5]
+
+    return tuplas2
 
 
 def pregunta_11():
@@ -239,7 +363,15 @@ def pregunta_11():
 
 
     """
-    return
+    data = procesamiento()
+
+    col2_4 = [(line[1], line[3]) for line in data]
+    col2_4 = [(letter, (int(line[0]))) for line in col2_4 for letter in line[1].split(",")]
+    counter = {}
+    for key, value in col2_4:
+        counter[key] = counter.get(key, 0) + value
+
+    return dict(sorted(counter.items()))
 
 
 def pregunta_12():
@@ -257,4 +389,19 @@ def pregunta_12():
     }
 
     """
-    return
+    
+    from collections import defaultdict
+
+    data = procesamiento()
+
+    cols1_5 = [(fila[0], fila[4].split(",")) for fila in data]
+    col_1_5_tuples = [(letra, int(reg.split(":")[1])) for letra,lista in cols1_5 for reg in lista]
+
+    d4 = defaultdict(int)
+
+    for k,v in col_1_5_tuples:
+        d4[k] += v
+
+    lista_tuplas3 = sorted(d4.items())
+
+    return dict(lista_tuplas3)
